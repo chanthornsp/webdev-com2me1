@@ -1,0 +1,128 @@
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  /* default light */
+  /* colors */
+  --brand-color: #28d30a;
+  --bg-color: white;
+  --secondary-color: #f5f5f5;
+  --text-color: #0a1ace;
+
+  /* typo */
+  --font-family: "Angkor", Arial, sans-serif;
+  --font-family-p: "Fasthand", Arial, sans-serif;
+  --font-size-header: 32px;
+  --font-size-p: 16px;
+
+  /* spacing */
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+}
+
+.dark {
+  /* colors */
+  --brand-color: #0d5400;
+  --secondary-color: #4a4a4a;
+  --text-color: #ffffff;
+  --bg-color: #252525;
+}
+
+/* mobile */
+
+body {
+  font-family: var(--font-family-p);
+  font-size: var(--font-size-p);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.header {
+  background-color: var(--brand-color);
+  padding: var(--spacing-md);
+  font-family: var(--font-family);
+}
+.my-text h2 {
+  background-color: var(--brand-color);
+  margin-top: calc(var(--spacing-sm) * 2);
+  padding: var(--spacing-md);
+  font-family: var(--font-family);
+}
+.my-text p {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+footer {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-md);
+}
+
+/* grid */
+.grid {
+  display: grid;
+  /* mobile */
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+.grid-item {
+  background-color: var(--brand-color);
+  padding: var(--spacing-lg);
+  color: var(--text-color);
+}
+
+.flex {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  flex-wrap: wrap;
+}
+.flex-item {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-lg);
+  color: var(--text-color);
+  /* mobile */
+  flex: 1 1 100%;
+  border: 1px solid var(--brand-color);
+}
+
+/* Tablet: 768px and up */
+@media screen and (min-width: 768px) {
+  :root {
+    --brand-color: red;
+  }
+  .dark {
+    /* colors */
+    --brand-color: #ab4d00;
+    --secondary-color: #4a4a4a;
+    --text-color: #ffffff;
+    --bg-color: #08003e;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flex-item {
+    flex: 1 1 calc(50% - var(--spacing-sm));
+  }
+}
+
+/* Desktop: 1024px and up */
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --brand-color: purple;
+    --font-size-p: 26px;
+    --text-color: blue;
+  }
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .flex-item {
+    flex: 1 1 calc(25% - var(--spacing-sm));
+  }
+}
