@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript</title>
+    <!-- <script>
+      function showGreeting() {
+        alert("Hello from Head!!");
+      }
+    </script> -->
+    <style>
+      .hidden {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>JavaScript</h1>
+    </header>
+    <main>
+      <h2 class="hidden">Show/Hide</h2>
+      <button type="button" id="show-hide">Show/Hide</button>
+      <p>Inline</p>
+      <button type="button" onclick="alert('Hello!')">Click Me</button>
+      <p>Internal</p>
+      <button type="button" id="click-2">Click me2</button>
+    </main>
+    <footer>
+      <p>25/02/2026</p>
+    </footer>
+    <script>
+      const click2 = document.getElementById("click-2");
+      const h1 = document.querySelector("h1");
+
+      click2.addEventListener("dblclick", function () {
+        h1.textContent = "Hello from JavaScript!!";
+        h1.style.color = "red";
+        h1.style.textDecoration = "line-through";
+        h1.style.fontSize = "11pt";
+      });
+
+      function showGreeting() {
+        alert("Hello from Head!!");
+      }
+
+      const showHideBtn = document.getElementById("show-hide");
+      const h2 = document.querySelector("h2");
+      showHideBtn.addEventListener("click", function () {
+        h2.classList.toggle("hidden");
+      });
+    </script>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
