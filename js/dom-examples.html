@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background: #0056b3;
+      }
+
+      .highlight {
+        background-color: yellow;
+        padding: 5px;
+        border-radius: 3px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #color-box {
+        width: 200px;
+        height: 100px;
+        background-color: lightblue;
+        border: 2px solid #333;
+        border-radius: 10px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      #todo-list {
+        margin-top: 20px;
+      }
+
+      .todo-item {
+        background: #f8f9fa;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border-left: 4px solid #007bff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .delete-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .delete-btn:hover {
+        background: #c82333;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript DOM Manipulation Examples</h1>
+
+    <!-- Example 1: Changing Text and Styles -->
+    <div class="container">
+      <h2>Example 1: Changing Text and Styles</h2>
+      <h3 id="main-title">Original Title</h3>
+      <p id="description">This is the original description text.</p>
+
+      <button class="button" id="change-text-btn">Change Text</button>
+      <button class="button" id="toggle-highlight-btn">Toggle Highlight</button>
+      <button class="button" id="reset-btn">Reset</button>
+    </div>
+
+    <!-- Example 2: Show/Hide Elements -->
+    <div class="container">
+      <h2>Example 2: Show/Hide Elements</h2>
+      <div id="secret-message" class="hidden">
+        🎉 This is a secret message! You found it!
+      </div>
+      <button class="button" id="toggle-message-btn">
+        Toggle Secret Message
+      </button>
+    </div>
+
+    <!-- Example 3: Dynamic Color Changer -->
+    <div class="container">
+      <h2>Example 3: Dynamic Styling</h2>
+      <div id="color-box">Click buttons to change me!</div>
+      <button class="button" id="red-btn">Red</button>
+      <button class="button" id="green-btn">Green</button>
+      <button class="button" id="blue-btn">Blue</button>
+      <button class="button" id="random-color-btn">Random Color</button>
+    </div>
+
+    <!-- Example 4: Simple To-Do List -->
+    <div class="container">
+      <h2>Example 4: Simple To-Do List</h2>
+      <div>
+        <input type="text" id="todo-input" placeholder="Enter a new task..." />
+        <button class="button" id="add-todo-btn">Add Task</button>
+      </div>
+      <div id="todo-list"></div>
+    </div>
+
+    <!-- Example 5: Form Interaction -->
+    <div class="container">
+      <h2>Example 5: Form Validation</h2>
+      <form id="demo-form">
+        <div style="margin-bottom: 15px">
+          <label for="name-input">Name:</label><br />
+          <input type="text" id="name-input" placeholder="Enter your name" />
+        </div>
+        <div style="margin-bottom: 15px">
+          <label for="email-input">Email:</label><br />
+          <input type="email" id="email-input" placeholder="Enter your email" />
+        </div>
+        <button type="submit" class="button">Submit</button>
+      </form>
+      <div id="form-message"></div>
+    </div>
+
+    <script>
+      // Wait for the page to load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Example 1: Changing Text and Styles
+        const mainTitle = document.getElementById("main-title");
+        const description = document.getElementById("description");
+        const changeTextBtn = document.getElementById("change-text-btn");
+        const toggleHighlightBtn = document.getElementById(
+          "toggle-highlight-btn"
+        );
+        const resetBtn = document.getElementById("reset-btn");
+
+        let isChanged = false;
+
+        changeTextBtn.addEventListener("click", function () {
+          if (!isChanged) {
+            mainTitle.textContent = "Title Changed with JavaScript!";
+            description.innerHTML =
+              "<strong>This text was changed using JavaScript!</strong>";
+            isChanged = true;
+          } else {
+            mainTitle.textContent = "Back to Original Title";
+            description.textContent = "And back to original description.";
+            isChanged = false;
+          }
+        });
+
+        toggleHighlightBtn.addEventListener("click", function () {
+          mainTitle.classList.toggle("highlight");
+        });
+
+        resetBtn.addEventListener("click", function () {
+          mainTitle.textContent = "Original Title";
+          description.textContent = "This is the original description text.";
+          mainTitle.classList.remove("highlight");
+          isChanged = false;
+        });
+
+        // Example 2: Show/Hide Elements
+        const secretMessage = document.getElementById("secret-message");
+        const toggleMessageBtn = document.getElementById("toggle-message-btn");
+
+        toggleMessageBtn.addEventListener("click", function () {
+          secretMessage.classList.toggle("hidden");
+          toggleMessageBtn.textContent = secretMessage.classList.contains(
+            "hidden"
+          )
+            ? "Show Secret Message"
+            : "Hide Secret Message";
+        });
+
+        // Example 3: Dynamic Color Changer
+        const colorBox = document.getElementById("color-box");
+        const redBtn = document.getElementById("red-btn");
+        const greenBtn = document.getElementById("green-btn");
+        const blueBtn = document.getElementById("blue-btn");
+        const randomColorBtn = document.getElementById("random-color-btn");
+
+        redBtn.addEventListener("click", function () {
+          colorBox.style.backgroundColor = "lightcoral";
+          colorBox.textContent = "I am red!";
+        });
+
+        greenBtn.addEventListener("click", function () {
+          colorBox.style.backgroundColor = "lightgreen";
+          colorBox.textContent = "I am green!";
+        });
+
+        blueBtn.addEventListener("click", function () {
+          colorBox.style.backgroundColor = "lightblue";
+          colorBox.textContent = "I am blue!";
+        });
+
+        randomColorBtn.addEventListener("click", function () {
+          const colors = [
+            "#ff6b6b",
+            "#4ecdc4",
+            "#45b7d1",
+            "#96ceb4",
+            "#feca57",
+            "#ff9ff3",
+            "#54a0ff",
+          ];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          colorBox.style.backgroundColor = randomColor;
+          colorBox.textContent = "Random color!";
+        });
+
+        // Example 4: Simple To-Do List
+        const todoInput = document.getElementById("todo-input");
+        const addTodoBtn = document.getElementById("add-todo-btn");
+        const todoList = document.getElementById("todo-list");
+        let todoCounter = 0;
+
+        function addTodo() {
+          const todoText = todoInput.value.trim();
+
+          if (todoText === "") {
+            alert("Please enter a task!");
+            return;
+          }
+
+          todoCounter++;
+
+          // Create new todo item
+          const todoItem = document.createElement("div");
+          todoItem.className = "todo-item";
+          todoItem.innerHTML = `
+                    <span>${todoCounter}. ${todoText}</span>
+                    <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+                `;
+
+          todoList.appendChild(todoItem);
+          todoInput.value = "";
+        }
+
+        addTodoBtn.addEventListener("click", addTodo);
+
+        // Allow adding todos with Enter key
+        todoInput.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            addTodo();
+          }
+        });
+
+        // Example 5: Form Validation
+        const demoForm = document.getElementById("demo-form");
+        const nameInput = document.getElementById("name-input");
+        const emailInput = document.getElementById("email-input");
+        const formMessage = document.getElementById("form-message");
+
+        demoForm.addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form from actually submitting
+
+          const name = nameInput.value.trim();
+          const email = emailInput.value.trim();
+
+          // Simple validation
+          if (name === "") {
+            formMessage.innerHTML =
+              '<p style="color: red;">❌ Please enter your name!</p>';
+            return;
+          }
+
+          if (email === "" || !email.includes("@")) {
+            formMessage.innerHTML =
+              '<p style="color: red;">❌ Please enter a valid email!</p>';
+            return;
+          }
+
+          // Success message
+          formMessage.innerHTML = `
+                    <p style="color: green;">✅ Form submitted successfully!</p>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                `;
+
+          // Clear form
+          nameInput.value = "";
+          emailInput.value = "";
+        });
+      });
+    </script>
+  </body>
+</html>
